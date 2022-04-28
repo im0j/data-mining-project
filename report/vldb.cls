@@ -984,7 +984,7 @@
         {4\p@}{\normalsize\@ucheadtrue}%
 }
 \def\section{%
-    \@startsection{section}{1}{\z@}{-10\p@ \@plus -4\p@ \@minus -2\p@}% GM
+    \@startsection{section}{1}{\z@}{10\p@ \@plus -4\p@ \@minus -2\p@}% GM
     {4\p@}{\baselineskip 14pt\secfnt\@ucheadtrue}%
 }
 
