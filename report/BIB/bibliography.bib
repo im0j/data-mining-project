@@ -1,0 +1,24 @@
+@inproceedings{10.1145/3394486.3403293,
+  author    = {Yang, Carl and Pal, Aditya and Zhai, Andrew and Pancha, Nikil and Han, Jiawei and Rosenberg, Charles and Leskovec, Jure},
+  title     = {MultiSage: Empowering GCN with Contextualized Multi-Embeddings on Web-Scale Multipartite Networks},
+  year      = {2020},
+  isbn      = {9781450379984},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3394486.3403293},
+  doi       = {10.1145/3394486.3403293},
+  abstract  = {Graph convolutional networks (GCNs) are a powerful class of graph neural networks. Trained in a semi-supervised end-to-end fashion, GCNs can learn to integrate node features and graph structures to generate high-quality embeddings that can be used for various downstream tasks like search and recommendation. However, existing GCNs mostly work on homogeneous graphs and consider a single embedding for each node, which do not sufficiently model the multi-facet nature and complex interaction of nodes in real-world networks. Here, we present a contextualized GCN engine by modeling the multipartite networks of target nodes and their intermediatecontext nodes that specify the contexts of their interactions. Towards the neighborhood aggregation process, we devise a contextual masking operation at the feature level and a contextual attention mechanism at the node level to achieve interaction contextualization by treating neighboring target nodes based on intermediate context nodes. Consequently, we compute multiple embeddings for target nodes that capture their diverse facets and different interactions during graph convolution, which is useful for fine-grained downstream applications. To enable efficient web-scale training, we build a parallel random walk engine to pre-sample contextualized neighbors, and a Hadoop2-based data provider pipeline to pre-join training data, dynamically reduce multi-GPU training time, and avoid high memory cost. Extensive experiments on the bipartite Pinterest graph and tripartite OAG graph corroborate the advantage of the proposed system.},
+  booktitle = {Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+  pages     = {2434–2443},
+  numpages  = {10},
+  keywords  = {graph neural network, contextualized multi-embedding, web-scale training and inference, search and recommendation},
+  location  = {Virtual Event, CA, USA},
+  series    = {KDD '20}
+}
+
+@article{wang2019dgl,
+  title   = {Deep Graph Library: A Graph-Centric, Highly-Performant Package for Graph Neural Networks},
+  author  = {Minjie Wang and Da Zheng and Zihao Ye and Quan Gan and Mufei Li and Xiang Song and Jinjing Zhou and Chao Ma and Lingfan Yu and Yu Gai and Tianjun Xiao and Tong He and George Karypis and Jinyang Li and Zheng Zhang},
+  year    = {2019},
+  journal = {arXiv preprint arXiv:1909.01315}
+}
