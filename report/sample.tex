@@ -4,7 +4,7 @@
 % Removed the requirement to include *bbl file in here. (AhmetSacan, Sep2012)
 % Fixed the equation on page 3 to prevent line overflow. (AhmetSacan, Sep2012)
 
-\documentclass{vldb}
+\documentclass[sigconf, nonacm]{acmart}
 \usepackage{graphicx}
 \usepackage{balance}  % for  \balance 
 \usepackage{graphics}
@@ -27,7 +27,7 @@
 	\newcommand{\eit}{\end{itemize*}}
 \newcommand{\goal}[1]{ {\noindent {$\Rightarrow$} \em {#1} } }
 \newcommand{\hide}[1]{}
-\newcommand{\comment}[1]{ {\footnotesize {#1} } }
+%\newcommand{\comment}[1]{ {\footnotesize {#1} } }
 %\newtheorem{lemma}{Lemma}
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{proof}{Proof}
@@ -64,19 +64,24 @@
     \state{South Korea}
 }
 \email{carol@kaist.ac.kr}
-
-\maketitle
+    
 \begin{abstract}
 	\input{000abstract}
 \end{abstract}
+\maketitle
 
 \section{Introduction}
 \label{sec:intro}
 \input{010intro}
 
+%\section{Survey}
+%\label{sec:survey}
+%\input{020survey}
+
 \section{Proposed Method}
 \label{sec:proposed}
 \input{030method}
+
 
 \section{Experiments}
 \label{sec:experiments}
@@ -86,15 +91,17 @@
 \label{sec:conclusions}
 \input{050conclusions}
 
+\section{REFERENCES}
+\label{sec:references}
+\input{060reference}
 
-\bibliography{BIB/christosref,BIB/other}
 \bibliographystyle{plain}
-
 
 \newpage
 \appendix
 \section{Appendix}
 \input{099appendix}
+
 
 
 \end{document}
