@@ -1,24 +1,33 @@
-% {\em
-% \bit
-% \item
-% what is the problem
-% \item
-% what are the applications
-% \eit
-% }
+Predicting cuisine from ingredients is to solve the completion task and classification task by using 6714 ingredients, 35317 recipes, and 20 cuisines.
+The completion task is to find a missing ingredient in a given recipe.
+The classification task is to find cuisine using a perfect recipe.
+The completion task predicts missing ingredients, so it can be helpful for grocery shopping or cooking at home.
+The classification task predicts the cuisine for each recipe, so it can know ingredients that are frequently used in a particular cuisine.
+Therefore, it can be helpful in trade or exchange by each country.
 
- Predicting cuisine from ingredients is to solve the completion task and classification task by using 6714
-ingredients, 35317 recipes, and 20 cuisines. The completion task is to find a missing ingredient in a given recipe. The classification task is to find cuisine using a perfect recipe. The completion task predicts missing ingredients, so it can be useful for grocery shopping or cooking at home. classification task predicts the cuisine for each recipe, so it can know ingredients that are frequently used in a particular cuisine.Therefore, it can be useful for trade or exchange by each country.
+We decided to use a recommendation system to solve these problems.
+A \emph{recommendation system} is a tool that assists users by presenting services or products that are most likely of their interest.
+In general, recommendations can be generated based on user preferences, item features, user-item transactions, and environmental factors such as time, season, and location.[1]
 
-We decided to use a recommendation system to solve these problems. A recommendation system is a tool that assists users by presenting services or products that are most likely of their interest. In general, recommendations can be generated based on user preferences, item features, user-item transactions, and other environmental factors such as time, season, and location.[1]
+Recently, the best performance of the recommendation system is the graph neural network, one of the deep learning architectures.
+Among graph neural networks, convolutional neural networks (GCNS) have received significant attention for the task of extracting information from large graphs.[2] 
 
-Recently, the best performance of the recommendation system is the graph natural network, one of the deep learning architectures. Among graph neural networks, convolutional neural networks (GCNS) have received significant attention for the task of extracting information from the large graph.[2] 
+GraphSAGE (SAmple and agreGate)[3] was created for inductive learning of GCNS.
+GraphSAGE trains a set of aggregator functions that learn to aggregate feature information from a node's local neighborhood.
+Among the recommendation system based on GraphSAGE are PinSAGE and  MultiSAGE.
 
-GraphSAGE (SAmple and agreGate)[3] was created for inductive learning of GCNS. GraphSAGE trains a set of aggregator functions that learn to aggregate feature information from a node’s local neighborhood. Among the recommendation system based on GraphSAGE are PinSAGE and  MultiSAGE.
+PinSAGE[4] is a random-work-based GCN. In PinSAGE, Pin and Board are expressed in a bipartite graph.
+The Pin is a general item, and the board represents multiple pins.
+Personalized Pagerank algorithm(PPR)[5] can be utilized as high-order heuristics that consider neighbors of the target node in the whole network for calculating the similarity score.
+The aggregate in PinSAGE used a PPR.
+PinSAGE captures connection information between pins through Metapath(Pin-Board-Pin) and embedding only for pins.
+Thus, PinSAGE considers the graph to be a homogeneous network of the Pin.
+Since the information on the board is used only as a metapath, there is a disadvantage in embedding information of node types other than the Pin cannot be generated.
 
-PinSAGE[4] is a random-work-based GCN.  In PinSAGE, Pin and Board are expressed in bi-partite graph. Pin is a general item and board is represent multiple pins. Personalized Pagerank algorithm(PPR)[5] can be utilized as high-order heuristics that consider neighbors of the target node in the whole network for calculating the similarity score. and the aggregate in PinSAGE used a PPR. PinSAGE captures connection information between pins through Metapath(Pin-Board-Pin) and embedding only for pins. Thus, PinSAGE considers the graph to be a homogeneous network of pin.  Since the information on the board is used only as a metapath, there is a disadvantage in that embedding information of node types other than pin cannot be generated.
+PPR is a pooling score that does not reflect the feature information of nodes.
+Thus, MultiSAGE[6] introduces the concept of graph attention network(GAT)[7].
+Also, unlike PinSAGE, which created and learned graphs in the form of bi-partite, MultiSAGE enables contextualized multi embeddings.
+That is, The embedding type can be different according to the situation.
 
-PPR is basically a pooling score that does not reflect the feature information of nodes. Thus, MultiSAGE[6] introduces the concept of graph attention network(GAT)[7]. Also unlike PinSAGE,  which created and learned graphs in the form of bi-partite, MultiSAGE enables contextualized multi embeddings. That is, The embedding type can be different according to the situation.
-
-If a graph is made using the connectivity of ingredients, recipes, and cuisines in the predicting cuisine problem, it becomes a heterogeneous network with three types of nodes. 
-Therefore, if each node is practiced as an important weight of a connected node through node embedding of MultiSAGE, it will be able to perform well in the completion task and classification task.
+If a graph is made using the connectivity of ingredients, recipes, and cuisines in the predicting cuisine problem, it becomes a heterogeneous network with three types of nodes.
+Therefore, if each node is practiced as an essential weight of a connected node through node embedding of MultiSAGE, it will perform well in the completion task and classification task.
