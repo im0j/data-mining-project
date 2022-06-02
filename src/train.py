@@ -52,13 +52,6 @@ graph = dgl.heterograph({
 })
 
 # %%
-graph.ndata['h'] = {
-    'ingredient': torch.randn((graph.num_nodes('ingredient'), 512)),
-    'recipe': torch.randn((graph.num_nodes('recipe'), 512)),
-    'cuisine': torch.randn((graph.num_nodes('cuisine'), 512)),
-}
-
-# %%
 graph.edata
 
 # %% [markdown]
@@ -505,6 +498,14 @@ class MultiSAGEModel(nn.Module):
         self.multisage = MultiSAGENet(hidden_dims, n_layers, gat_num_heads)
         self.node_scorer = ItemToItemScorer(full_graph, ntype)
         self.context1_scorer = ItemToItemScorer(full_graph, c1type)
+        self.ntype_params = nn.Parameter(torch.randn(full_graph.num_nodes(ntype), hidden_dims))
+        self.c1type_params = nn.Parameter(torch.randn(full_graph.num_nodes(c1type), hidden_dims))
+        self.c2type_params = nn.Parameter(torch.randn(full_graph.num_nodes(c2type), hidden_dims))
+        full_graph.ndata['h'] = {
+            ntype: self.ntype_params,
+            c1type: self.c1type_params,
+            c2type: self.c2type_params,
+        }
 
     def forward(
         self,
@@ -577,14 +578,15 @@ class MultiSAGEModel(nn.Module):
 
 # %%
 random_walk_length = 2
-random_walk_restart_prob = 0.5
+random_walk_restart_prob = 0.1
 num_random_walks = 10
 num_neighbors = 5
 num_layers = 2
 gat_num_heads = 3
-hidden_dims = 512
+hidden_dims = 128
 batch_size = 256
-num_epochs = 5
+num_epochs = 10
+num_batch_per_epoch = 1000
 num_workers = 0
 lr = 3e-5
 k = 10
@@ -592,6 +594,13 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # %%
 print(device.type)
+
+# %%
+# graph.ndata['h'] = {
+#     'ingredient': nn.Parameter(torch.randn(graph.num_nodes('ingredient'), hidden_dims)),
+#     'recipe': nn.Parameter(torch.randn(graph.num_nodes('recipe'), hidden_dims)),
+#     'cuisine': nn.Parameter(torch.randn(graph.num_nodes('cuisine'), hidden_dims)),
+# }
 
 # %%
 
@@ -665,6 +674,9 @@ def train():
                 print(f'num_epochs: {epoch_id} | batches_per_epoch {batch_id} | '
                       f'loss: {loss}')
 
+            if batch_id >= num_batch_per_epoch:
+                break
+
         for batch_id, (pos_graph, neg_graph, blocks, context_blocks) in enumerate(secondary_dataloader):
             loss = model(pos_graph, neg_graph, blocks, context_blocks, level=2).mean()
             optimizer.zero_grad()
@@ -674,6 +686,9 @@ def train():
             if batch_id % 10 == 0:
                 print(f'num_epochs: {epoch_id} | batches_per_epoch {batch_id} | '
                       f'loss: {loss}')
+
+            if batch_id >= num_batch_per_epoch:
+                break
 
     model.eval()
     with torch.no_grad():
