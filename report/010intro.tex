@@ -16,9 +16,9 @@ GraphSAGE (SAmple and agreGate)\cite{hamilton2017inductive} was created for indu
 GraphSAGE trains a set of aggregator functions that learn to aggregate feature information from a node's local neighborhood.
 Among the recommendation system based on GraphSAGE are PinSAGE and  MultiSAGE.
 
-PinSAGE\cite{ying2018graph} is a random-work-based GCN. In PinSAGE, Pin and Board are expressed in a bipartite graph.
+PinSAGE\cite{ying2018graph} is a random-walk-based GCN. In PinSAGE, Pin and Board are expressed in a bipartite graph.
 The Pin is a general item, and the board represents multiple pins.
-Personalized Pagerank algorithm(PPR)\cite{bahmani2010fast} can be utilized as high-order heuristics that consider neighbors of the target node in the whole network for calculating the similarity score.
+Personalized Pagerank algorithm (PPR)\cite{bahmani2010fast} can be utilized as high-order heuristics that consider neighbors of the target node in the whole network for calculating the similarity score.
 The aggregate in PinSAGE used a PPR.
 PinSAGE captures connection information between pins through Metapath(Pin-Board-Pin) and embedding only for pins.
 Thus, PinSAGE considers the graph to be a homogeneous network of the Pin.
