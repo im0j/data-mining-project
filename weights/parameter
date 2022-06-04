@@ -1,0 +1,13 @@
+random_walk_length = 6
+random_walk_restart_prob = 0.1
+num_random_walks = 20
+num_neighbors = 10
+num_layers = 2
+gat_num_heads = 3
+hidden_dims = 256
+batch_size = 256
+num_epochs = 40
+num_batch_per_epoch = 1000
+num_workers = 0
+lr = 3e-5
+k = 10
