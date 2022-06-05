@@ -5,7 +5,16 @@
  \subsection{Dataset}
  Dataset consists of 7 files. \texttt{train.csv} has 35317 rows where each row represents the recipe. \texttt{validation\_\texttt{\{classification/completion\}}\_\texttt{\{answer/question\}}.csv} has 7847 rows for each tasks. \texttt{test\_\texttt{\{classification/completion\}}\_question.csv} has 3923 rows for each tasks and the test set has no answers.  
  
-  We're aiming to train the MultiSAGE model suggested to solve the given tasks with \texttt{train.csv} and validate the performance of model with \texttt{validation*.csv} files and submit the answers of the test set. 
+  We're aiming to train the MultiSAGE model suggested to solve the given tasks with \texttt{train.csv} and validate the performance of model with \texttt{validation*.csv} files and submit the answers of the test set.
+
+  The class distributions of the train and validation set are shown in figure \autoref{fig:class_dist}, respectively.
+
+  \begin{figure}
+      \includegraphics[width=0.49\linewidth]{FIG/train_class_dist.pdf}
+      \includegraphics[width=0.49\linewidth]{FIG/val_class_dist.pdf}
+      \caption{\label{fig:class_dist} Class distribution of the training set (left) and validation set (right).}
+  \end{figure}
+
  \subsection{Recipe Classification Task Into Cuisine}
  
  \begin{table}[btp!]
@@ -27,22 +36,18 @@
  
   The results of classification on validation set using our model and other baseline models are shown in \autoref{tab:classification_task_result}.  
   
- \subsection{Ingredient Completion}
-   
- \begin{table}[btp!]
-    \centering
-    \begin{tabular}{ c c c c }
-        \toprule
-        \textbf{Methods} & \textbf{Micro F1-score} & \textbf{Macro F1-score} & \textbf{Accuracy} \\
-        \midrule
-        MultiSAGE & & & \\
-        \bottomrule
-    \end{tabular}
-    \caption{\label{tab:compleition_task_result}Performance measured by \{Micro/Macro\} F1-score and accuracy of our model in validation classification set.}
+ \subsection{Ingredient Completion Task}
+ For the completion task, we computed the sum of pairwise score between the ingredients already in the recipe $R$ and the new ingredient $i$. The missing ingredient can be found by choosing the ingredient that maximizes the pairwise score.
+ \begin{equation}
+     Score(R, i) = \sum_{j \in R} \langle h_i, h_j \rangle + b_i + b_j.
+ \end{equation}
+ Here, $h$ is a node embedding and $b$ is a bias term learned by model's scoring function. See \texttt{completion.ipynb} for implementation details. The performance of the model for ingredient completion task is shown in Figure \autoref{fig:completion_val_ranks}.
 
- \end{table}
-The results of completion on validation set using our model are shown in \autoref{tab:compleition_task_result}. 
- 
+ \begin{figure}[btp!]
+     \includegraphics[width=\linewidth,trim={0 14cm 0 0},clip]{FIG/completion_val_ranks.pdf}
+     \caption{\label{fig:completion_val_ranks} The rank distribution of the correct ingredient in the model's prediction.}
+ \end{figure}
+
 \begin{comment}
 \begin{enumerate}
     \item MultiSAGE
