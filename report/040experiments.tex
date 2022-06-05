@@ -35,6 +35,7 @@
  \end{table}
  
   The results of classification on validation set using our model and other baseline models are shown in \autoref{tab:classification_task_result}.  
+  We used the classification method using 6714 ingredient node vectors learned through MultiSAGE. Through MultiSAGE, the ingredient node learned recipe information through context vector. Each ingredient node was trained as a 256-dimensional vector. A single representative node was created through the mean method of aggregation by selecting a vector for the ingredients of the recipe. 20 cuisines were predicted using this 256-dimensional vector. As a result, multiSAGE performed better than other models.
   
  \subsection{Ingredient Completion Task}
  For the completion task, we computed the sum of pairwise score between the ingredients already in the recipe $R$ and the new ingredient $i$. The missing ingredient can be found by choosing the ingredient that maximizes the pairwise score.
