@@ -1,0 +1,33 @@
+Predicting cuisine from ingredients is to solve the completion task and classification task by using 6714 ingredients, 35317 recipes, and 20 cuisines.
+The completion task is to find a missing ingredient in a given recipe.
+The classification task is to find cuisine using a perfect recipe.
+The completion task predicts missing ingredients, so it can be helpful for grocery shopping or cooking at home.
+The classification task predicts the cuisine for each recipe, so it can know ingredients that are frequently used in a particular cuisine.
+Therefore, it can be helpful in trade or exchange by each country.
+
+We decided to use a recommendation system to solve these problems.
+A \emph{recommendation system} is a tool that assists users by presenting services or products that are most likely of their interest.
+In general, recommendations can be generated based on user preferences, item features, user-item transactions, and environmental factors such as time, season, and location\cite{da2020recommendation}.
+
+Recently, the best performance of the recommendation system is the graph neural network, one of the deep learning architectures.
+Among graph neural networks, convolutional neural networks (GCNS) have received significant attention for the task of extracting information from large graphs\cite{chen2018fastgcn}.
+
+GraphSAGE (SAmple and agreGate)\cite{hamilton2017inductive} was created for inductive learning of GCNS.
+GraphSAGE trains a set of aggregator functions that learn to aggregate feature information from a node's local neighborhood.
+Among the recommendation system based on GraphSAGE are PinSAGE and  MultiSAGE.
+
+PinSAGE\cite{ying2018graph} is a random-walk-based GCN. In PinSAGE, Pin and Board are expressed in a bipartite graph.
+The Pin is a general item, and the board represents multiple pins.
+Personalized Pagerank algorithm (PPR)\cite{bahmani2010fast} can be utilized as high-order heuristics that consider neighbors of the target node in the whole network for calculating the similarity score.
+The aggregate in PinSAGE used a PPR.
+PinSAGE captures connection information between pins through Metapath(Pin-Board-Pin) and embedding only for pins.
+Thus, PinSAGE considers the graph to be a homogeneous network of the Pin.
+Since the information on the board is used only as a metapath, there is a disadvantage in embedding information of node types other than the Pin cannot be generated.
+
+PPR is a pooling score that does not reflect the feature information of nodes.
+Thus, MultiSAGE\cite{yang2020multisage} introduces the concept of graph attention network(GAT)\cite{velivckovic2017graph}.
+Also, unlike PinSAGE, which created and learned graphs in the form of bi-partite, MultiSAGE enables contextualized multi embeddings.
+That is, The embedding type can be different according to the situation.
+
+If a graph is made using the connectivity of ingredients, recipes, and cuisines in the predicting cuisine problem, it becomes a heterogeneous network with three types of nodes.
+Therefore, if each node is practiced as an essential weight of a connected node through node embedding of MultiSAGE, it will perform well in the completion task and classification task.
