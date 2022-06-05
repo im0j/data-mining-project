@@ -16,9 +16,10 @@
   \end{figure}
 
  \subsection{Recipe Classification Task Into Cuisine}
- 
+
  \begin{table}[btp!]
     \centering
+    \resizebox{\linewidth}{!}{%
     \begin{tabular}{ c c c c }
         \toprule
         \textbf{Methods} & \textbf{Micro F1-score} & \textbf{Macro F1-score} & \textbf{Accuracy} \\
@@ -30,6 +31,7 @@
         \bottomrule
         
     \end{tabular}
+    }
     \caption{\label{tab:classification_task_result} Performance measured by \{Micro/Macro\} F1-score and accuracy of each model in validation classification set.}
 
  \end{table}
