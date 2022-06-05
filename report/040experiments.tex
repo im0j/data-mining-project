@@ -1,3 +1,49 @@
+
+
+ We conduct experiments on given dataset which consists of 35317 recipes, 6714 ingredients and 20 cuisines. In following sections, we would compare our results and some results from basic models such as Random Forest, Linear Regression, and Linear SVC.
+ 
+ \subsection{Dataset}
+ Dataset consists of 7 files. \texttt{train.csv} has 35317 rows where each row represents the recipe. \texttt{validation\_\texttt{\{classification/completion\}}\_\texttt{\{answer/question\}}.csv} has 7847 rows for each tasks. \texttt{test\_\texttt{\{classification/completion\}}\_question.csv} has 3923 rows for each tasks and the test set has no answers.  
+ 
+  We're aiming to train the MultiSAGE model suggested to solve the given tasks with \texttt{train.csv} and validate the performance of model with \texttt{validation*.csv} files and submit the answers of the test set. 
+ \subsection{Recipe Classification Task Into Cuisine}
+ 
+ \begin{table}[btp!]
+    \centering
+    \begin{tabular}{ c c c c }
+        \toprule
+        \textbf{Methods} & \textbf{Micro F1-score} & \textbf{Macro F1-score} & \textbf{Accuracy} \\
+        \midrule
+        LinearSVC & 0.635 & 0.510 & 0.635 \\
+        RandomForest & 0.471 & 0.210 & 0.472 \\
+        Linear Regression & 0.638 & 0.531 & 0.638 \\
+        \textbf{MultiSAGE} & & & \\
+        \bottomrule
+        
+    \end{tabular}
+    \caption{\label{tab:classification_task_result} Performance measured by \{Micro/Macro\} F1-score and accuracy of each model in validation classification set.}
+
+ \end{table}
+ 
+  The results of classification on validation set using our model and other baseline models are shown in \autoref{tab:classification_task_result}.  
+  
+ \subsection{Ingredient Completion}
+   
+ \begin{table}[btp!]
+    \centering
+    \begin{tabular}{ c c c c }
+        \toprule
+        \textbf{Methods} & \textbf{Micro F1-score} & \textbf{Macro F1-score} & \textbf{Accuracy} \\
+        \midrule
+        MultiSAGE & & & \\
+        \bottomrule
+    \end{tabular}
+    \caption{\label{tab:compleition_task_result}Performance measured by \{Micro/Macro\} F1-score and accuracy of our model in validation classification set.}
+
+ \end{table}
+The results of completion on validation set using our model are shown in \autoref{tab:compleition_task_result}. 
+ 
+\begin{comment}
 \begin{enumerate}
     \item MultiSAGE
     \begin{enumerate}
@@ -16,5 +62,5 @@
         \newline fig3 model performance
     \end{enumerate}
 \end{enumerate}
-
+\end{comment}
 
