@@ -51,6 +51,8 @@ graph = dgl.heterograph({
     ('cuisine', 'c2r', 'recipe'): cui_rec,
 })
 
+dgl.save_graphs(str(datapath / 'graph.bin'), [graph])
+
 # %%
 graph.edata
 
@@ -708,6 +710,7 @@ def train():
 
 
 # %%
-model, h_item = train()
+if __name__ == '__main__':
+    model, h_item = train()
 
 # %%
