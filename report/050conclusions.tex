@@ -1,0 +1,6 @@
+In this report, we suggested that given dataset of two tasks (classification of given recipe into cuisine, and completion of given recipe) needed to be explained in heterogeneous graph. We built the tripartite graph \texttt{ingredient-recipe-cuisine}. Based on that, we decided to utilize MultiSAGE \cite{yang2020multisage} which can understand contextual information, such as recipes in this project. Furthermore, we developed the method to be used in multiple contextual information, extend the level of contexts and the architecture. After that, We conducted experiments in given validation set. The experiments showed that our suggesting model could give reasonable results too.
+
+ However, there are some remaining points to possibly be improved in further researches. (1) Better representation of recipe nodes might be needed because our model can work in given dataset's recipes only which could result in performing badly in new recipes. (2) Searching parameters more for optimizing would be needed to get better performance. (3) Giving some explanations with methods such as attention map to show how our model utilized contextual information might give more validations to users in practice. 
+
+\begin{comment}
+\end{comment}
